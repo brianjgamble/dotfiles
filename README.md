@@ -1,6 +1,9 @@
 dotfiles
 ========
 
-Steps to start using the dotfiles:
-1. Clone the dotfiles repo to ~/bin/dotfiles
-2. Run 'setup_links.sh'
+Clone this repository to ~/bin/dotfiles.
+
+From the dotfiles directory:
+	./setup_links.sh
+
+This will create the symlinks for the config files in your home directory.
