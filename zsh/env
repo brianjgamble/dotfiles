@@ -1,0 +1,6 @@
+##
+## Values used by other scripts and applications
+##
+export EDITOR="/usr/bin/vim"
+export JAVA_HOME="/Library/Java/Home"
+export PATH="$HOME/bin:/usr/local/bin:$PATH"

@@ -1,0 +1,41 @@
+##
+## Shortcut commands and functions with arguments
+##
+
+## aliases ##
+
+function parse_git_branch {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ -n $ref ]]; then
+    echo "(%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%})"
+  fi
+}
+
+# miscellaneous
+alias h="history"
+alias l="ls -laGh"
+
+# processes
+alias tu="top -o cpu" # cpu
+alias tm="top -o vsize" # memory
+
+# git
+alias g="git status"
+
+# homebrew
+alias bu="brew update; brew outdated | xargs brew install"
+
+## functions ##
+
+function take {
+	mkdir $1
+	cd $1
+}
+
+# list frequent commands and their frequency
+function frequency {
+	history |
+	awk '{a[$2]++}END{for(i in a){print a[i] " "i}}' |
+	sort -rn |
+	head
+}
