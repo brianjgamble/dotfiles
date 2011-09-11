@@ -3,7 +3,7 @@ dotfiles
 
 Clone this repository to:
 
-    ~/bin/dotfiles.
+    ~/bin/dotfiles
 
 From the cloned directory:
 
