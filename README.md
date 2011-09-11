@@ -1,9 +1,12 @@
 dotfiles
 ========
 
-Clone this repository to ~/bin/dotfiles.
+Clone this repository to:
 
-From the dotfiles directory:
-	./setup_links.sh
+    ~/bin/dotfiles.
 
-This will create the symlinks for the config files in your home directory.
+From the cloned directory:
+
+    ./setup_links.sh
+
+This will create symlinks for the config files in your home directory.
