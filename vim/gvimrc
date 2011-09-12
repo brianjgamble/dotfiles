@@ -7,5 +7,5 @@ set lines=50 columns=150          " Window dimensions.
 
 " Uncomment to use.
 " set guioptions-=r                 " Don't show right scrollbar
-
+colorscheme railscasts
 
