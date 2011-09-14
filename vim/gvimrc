@@ -9,3 +9,8 @@ set lines=50 columns=150          " Window dimensions.
 " set guioptions-=r                 " Don't show right scrollbar
 colorscheme railscasts
 
+" Map peepopen to command-T
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<nop>
+  map <D-t> <Plug>PeepOpen
+end
