@@ -25,6 +25,9 @@ alias g="git status"
 # homebrew
 alias bu="brew update; brew outdated | xargs brew install"
 
+# MacVim
+alias vim=/usr/local/Cellar/macvim/7.3-61/MacVim.app/Contents/MacOS/Vim
+
 ## functions ##
 
 function take {
