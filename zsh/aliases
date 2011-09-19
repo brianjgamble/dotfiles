@@ -26,7 +26,7 @@ alias g="git status"
 alias bu="brew update; brew outdated | xargs brew install"
 
 # MacVim
-alias vim=/usr/local/Cellar/macvim/7.3-61/MacVim.app/Contents/MacOS/Vim
+alias vim=~/Applications/MacVim.app/Contents/MacOS/Vim
 
 ## functions ##
 
