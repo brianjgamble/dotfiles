@@ -14,3 +14,6 @@ map <leader>tm :tabmove
 
 " switch between files
 map ,, <C-^>
+
+" map command-t refresh
+map <leader>tr :CommandTFlush<cr> 
