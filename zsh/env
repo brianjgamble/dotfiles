@@ -3,4 +3,4 @@
 ##
 export EDITOR="/usr/bin/vim"
 export JAVA_HOME="/Library/Java/Home"
-export PATH="$HOME/bin:$HOME/.cabal/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/bin:$HOME/Library/Haskell/bin:$HOME/.cabal/bin:/usr/local/bin:$PATH"
