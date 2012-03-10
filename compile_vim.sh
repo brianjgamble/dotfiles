@@ -2,9 +2,10 @@
 
 ./configure --disable-darwin \
             --with-features=huge \
-            --with-tlib=ncurses \
+            --disable-gpm \
             --enable-multibyte \
-            --with-macarchs=x86_64 \
+            --disable-nls \
             --enable-rubyinterp \
-            --enable-tclinterp
+            --enable-gui=no \
+            --without-x
 make
