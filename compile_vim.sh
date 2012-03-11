@@ -9,5 +9,6 @@
             --disable-nls \
             --with-tlib=ncurses \
             --enable-rubyinterp \
-            --enable-pythoninterp
+            --enable-pythoninterp \
+            --disable-netbeans
 make
