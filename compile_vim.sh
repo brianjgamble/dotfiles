@@ -1,11 +1,13 @@
 #!/bin/sh
 
 ./configure --disable-darwin \
+            --enable-gui=no \
+            --without-x \
             --with-features=huge \
             --disable-gpm \
             --enable-multibyte \
             --disable-nls \
+            --with-tlib=ncurses \
             --enable-rubyinterp \
-            --enable-gui=no \
-            --without-x
+            --enable-pythoninterp
 make
