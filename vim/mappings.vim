@@ -17,3 +17,6 @@ map ,, <C-^>
 
 " map command-t refresh
 map <leader>tr :CommandTFlush<cr> 
+
+" run all specs
+map <leader>r :w\|!rspec spec<cr>
