@@ -5,6 +5,7 @@
             --without-x \
             --with-features=huge \
             --disable-gpm \
+            --enable-cscope \
             --enable-multibyte \
             --disable-nls \
             --with-tlib=ncurses \
