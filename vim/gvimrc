@@ -9,9 +9,3 @@ set lines=50 columns=150          " Window dimensions.
 " set guioptions-=r                 " Don't show right scrollbar
 
 colorscheme railscasts
-
-" Map command-T
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
-  map <D-t> :CommandT<CR>
-end
