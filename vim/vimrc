@@ -54,7 +54,7 @@ colorscheme railscasts
 " Configure CtrlP
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'rc'
+let g:ctrlp_working_path_mode = 'ra'
 
 " Load mappings
 source $HOME/.vim/mappings.vim
