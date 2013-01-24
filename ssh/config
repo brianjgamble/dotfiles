@@ -1,4 +1,0 @@
-Host myserver
-	HostName foo
-	User myuser
-	Port 2233
