@@ -9,7 +9,5 @@
             --enable-multibyte \
             --disable-nls \
             --with-tlib=ncurses \
-            --enable-rubyinterp \
-            --enable-pythoninterp \
             --disable-netbeans
 make
