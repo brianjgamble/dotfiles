@@ -1,7 +1,7 @@
 " File:       hybrid.vim
 " Maintainer: Andrew Wong (w0ng)
-" URL:        https://github.com/w0ng/hybrid.vim
-" Modified:   11 Aug 2012 11:03AM AEST
+" URL:        https://github.com/w0ng/vim-hybrid
+" Modified:   27 Jan 2013 07:33 AM AEST
 " License:    MIT
 
 " Description:"{{{
@@ -67,7 +67,7 @@ if has("gui_running")
   let s:foreground = "#c5c8c6"
   let s:selection  = "#373b41"
   let s:line       = "#282a2e"
-  let s:comment    = "#969896"
+  let s:comment    = "#707880"
   let s:red        = "#cc6666"
   let s:orange     = "#de935f"
   let s:yellow     = "#f0c674"
@@ -106,7 +106,7 @@ else
     let s:foreground = "250"
     let s:selection  = "237"
     let s:line       = "235"
-    let s:comment    = "246"
+    let s:comment    = "243"
     let s:red        = "167"
     let s:orange     = "173"
     let s:yellow     = "221"
@@ -299,7 +299,7 @@ exe "hi! Statement"       .s:fg_blue        .s:bg_none        .s:fmt_none
 "		Conditional"
 "		Repeat"
 "		Label"
-exe "hi! Operator"        .s:fg_foreground  .s:bg_none        .s:fmt_none
+exe "hi! Operator"        .s:fg_aqua        .s:bg_none        .s:fmt_none
 "		Keyword"
 "		Exception"
 
