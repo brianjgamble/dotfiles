@@ -1,0 +1,10 @@
+[user]
+	email = bjgamble@gmail.com
+	name = Brian Gamble
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[apply]
+	whitespace = nowarn
