@@ -1,3 +1,8 @@
 # Settings
-fontName = "Liberation Mono"
-fontSize = 14
+encoding         = UTF-8
+fontName         = "Source Code Pro"
+fontSize         = 16
+lineEndings      = '\n'
+showInvisibles   = false
+softWrap         = true
+tabSize          = 2
