@@ -5,4 +5,5 @@ fontSize         = 16
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = true
+softTabs         = true
 tabSize          = 2
