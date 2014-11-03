@@ -988,8 +988,6 @@ function! s:BufCommands()
   command! -buffer -bar -nargs=* -bang Rabbrev :call s:Abbrev(<bang>0,<f-args>)
   command! -buffer -bar -nargs=? -bang -count -complete=customlist,rails#complete_rake Rake    :call s:Rake(<bang>0,!<count> && <line1> ? -1 : <count>,<q-args>)
   command! -buffer -bar -nargs=? -bang -range -complete=customlist,s:Complete_preview Rpreview :call s:Preview(<bang>0,<line1>,<q-args>)
-  command! -buffer -bar -nargs=? -bang -range -complete=customlist,s:Complete_preview Rbrowse :call s:Preview(<bang>0,<line1>,<q-args>)
-  command! -buffer -bar -nargs=? -bang -range -complete=customlist,s:Complete_preview Preview :call s:Preview(<bang>0,<line1>,<q-args>)
   command! -buffer -bar -nargs=? -bang -complete=customlist,s:Complete_environments   Rlog     :call s:Log(<bang>0,<q-args>)
   command! -buffer -bar -nargs=* -bang                                                Rset     :call s:Set(<bang>0,<f-args>)
   command! -buffer -bar -nargs=0 Rtags       :execute rails#app().tags_command()
@@ -1002,13 +1000,10 @@ function! s:BufCommands()
   if RailsFilePath() =~ '\<app/views/'
     " TODO: complete controller names with trailing slashes here
     command! -buffer -bar -bang -nargs=? -range -complete=customlist,s:controllerList Rextract :<line1>,<line2>call s:Extract(<bang>0,<f-args>)
-    command! -buffer -bar -bang -nargs=? -range -complete=customlist,s:controllerList Extract  :<line1>,<line2>call s:Extract(<bang>0,<f-args>)
   elseif rails#buffer().name() =~# '^app/helpers/.*\.rb$'
     command! -buffer -bar -bang -nargs=1 -range Rextract :<line1>,<line2>call s:RubyExtract(<bang>0, 'app/helpers', [], s:sub(<f-args>, '_helper$|Helper$|$', '_helper'))
-    command! -buffer -bar -bang -nargs=1 -range Extract  :<line1>,<line2>call s:RubyExtract(<bang>0, 'app/helpers', [], s:sub(<f-args>, '_helper$|Helper$|$', '_helper'))
   elseif rails#buffer().name() =~# '^app/\w\+/.*\.rb$'
     command! -buffer -bar -bang -nargs=1 -range Rextract :<line1>,<line2>call s:RubyExtract(<bang>0, matchstr(rails#buffer().name(), '^app/\w\+/').'concerns', ['  extend ActiveSupport::Concern', ''], <f-args>)
-    command! -buffer -bar -bang -nargs=1 -range Extract  :<line1>,<line2>call s:RubyExtract(<bang>0, matchstr(rails#buffer().name(), '^app/\w\+/').'concerns', ['  extend ActiveSupport::Concern', ''], <f-args>)
   endif
   if RailsFilePath() =~ '\<db/migrate/.*\.rb$'
     command! -buffer -bar                 Rinvert  :call s:Invert(<bang>0)
@@ -1073,7 +1068,7 @@ function! rails#new_app_command(bang,...) abort
   return ''
 endfunction
 
-function! s:app_tags_command() dict abort
+function! s:app_tags_command() dict
   if exists("g:Tlist_Ctags_Cmd")
     let cmd = g:Tlist_Ctags_Cmd
   elseif executable("exuberant-ctags")
@@ -1090,19 +1085,8 @@ function! s:app_tags_command() dict abort
     call s:error("ctags not found")
     return ''
   endif
-  let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd' : 'cd'
-  let cwd = getcwd()
-  try
-    execute cd fnameescape(self.path())
-    if self.has_path('.ctags')
-      let args = []
-    else
-      let args = s:split(get(g:, 'rails_ctags_arguments', '--languages=ruby'))
-    endif
-    exe '!'.cmd.' -R '.join(args,' ')
-  finally
-    execute cd fnameescape(cwd)
-  endtry
+  let args = s:split(get(g:, 'rails_ctags_arguments', '--languages=-javascript'))
+  exe '!'.cmd.' -f '.s:escarg(self.path("tags")).' -R --langmap="ruby:+.rake.builder.jbuilder.rjs" '.join(args,' ').' '.s:escarg(self.path())
   return ''
 endfunction
 
@@ -1141,6 +1125,7 @@ endfunction
 function! s:RefreshBuffer()
   if exists("b:rails_refresh") && b:rails_refresh
     let b:rails_refresh = 0
+    call rails#buffer_setup()
     let &filetype = &filetype
     unlet! b:rails_refresh
   endif
@@ -1251,7 +1236,6 @@ function! s:readable_test_file_candidates() dict abort
           \ fnamemodify(f,':s?\<app/?spec/?')."_spec.rb",
           \ fnamemodify(f,':r:s?\<app/?spec/?')."_spec.rb",
           \ fnamemodify(f,':r:r:s?\<app/?spec/?')."_spec.rb",
-          \ s:sub(s:sub(f,'<app/views/','test/controllers/'),'/[^/]*$','_controller_test.rb'),
           \ s:sub(s:sub(f,'<app/views/','test/functional/'),'/[^/]*$','_controller_test.rb')]
   elseif self.type_name('controller-api')
     let tests = [
@@ -1329,12 +1313,9 @@ function! s:readable_default_rake_task(...) dict abort
   let placeholders = {}
   if lnum
     let placeholders.l = lnum
-    let placeholders.lnum = lnum
-    let placeholders.line = lnum
     let last = self.last_method(lnum)
     if !empty(last)
       let placeholders.d = last
-      let placeholders.define = last
     endif
   endif
   let tasks = self.projected('task', placeholders)
@@ -1421,8 +1402,8 @@ function! s:readable_default_rake_task(...) dict abort
   endif
 endfunction
 
-function! s:app_rake_command(...) dict abort
-  if get(a:, 1, '') !=# 'static' && self.has_path('.zeus.sock') && executable('zeus')
+function! s:app_rake_command() dict abort
+  if self.has_path('.zeus.sock') && executable('zeus')
     return 'zeus rake'
   elseif self.has_path('bin/rake')
     return self.ruby_script_command('bin/rake')
@@ -1434,7 +1415,7 @@ function! s:app_rake_command(...) dict abort
 endfunction
 
 function! rails#complete_rake(A,L,P)
-  return s:completion_filter(rails#app().rake_tasks(), a:A, ':')
+  return s:completion_filter(rails#app().rake_tasks(),a:A)
 endfunction
 
 call s:add_methods('readable', ['test_file_candidates', 'test_file', 'default_rake_task'])
@@ -1492,7 +1473,7 @@ function! s:readable_preview_urls(lnum) dict abort
     let start += 1
   endwhile
   if has_key(self,'getvar') && self.getvar('rails_preview') != ''
-    let urls += [self.getvar('rails_preview')]
+    let url += [self.getvar('rails_preview')]
   endif
   if self.name() =~ '^public/stylesheets/sass/'
     let urls = urls + [s:sub(s:sub(self.name(),'^public/stylesheets/sass/','/stylesheets/'),'\.s[ac]ss$','.css')]
@@ -1508,20 +1489,11 @@ function! s:readable_preview_urls(lnum) dict abort
     let urls = urls + [s:sub(s:sub(self.name(),'^app/scripts/','/javascripts/'),'\.coffee$','.js')]
   elseif self.controller_name() != '' && self.controller_name() != 'application'
     if self.type_name('controller') && self.last_method(a:lnum) != ''
-      let handler = self.controller_name().'#'.self.last_method(a:lnum)
+      let urls += ['/'.self.controller_name().'/'.self.last_method(a:lnum).'/']
     elseif self.type_name('controller','view-layout','view-partial')
-      let handler = self.controller_name().'#index'
+      let urls += ['/'.self.controller_name().'/']
     elseif self.type_name('view')
-      let handler = self.controller_name().'#'.fnamemodify(self.name(),':t:r:r')
-    endif
-    if exists('handler')
-      call self.app().route_names()
-      for route in values(self.app().cache.get('named_routes'))
-        if route.method ==# 'GET' && route.handler ==# handler
-          let urls += [s:gsub(s:gsub(route.path, '\([^()]*\)', ''), ':\w+', '1')]
-
-        endif
-      endfor
+      let urls += ['/'.s:controller().'/'.fnamemodify(self.name(),':t:r:r').'/']
     endif
   endif
   return urls
@@ -1611,16 +1583,11 @@ endfunction
 
 function! s:BufScriptWrappers()
   command! -buffer -bang -bar -nargs=* -complete=customlist,s:Complete_script   Rscript       :execute empty(<q-args>) ? rails#app().script_command(<bang>0, 'console') ? rails#app().script_command(<bang>0,<f-args>)
-  command! -buffer -bang -bar -nargs=* -complete=customlist,s:Complete_environments Console   :Rails<bang> console <args>
   command! -buffer -bang -bar -nargs=* -complete=customlist,s:Complete_script   Rails         :execute rails#app().script_command(<bang>0,<f-args>)
   command! -buffer -bang -bar -nargs=* -complete=customlist,s:Complete_generate Rgenerate     :execute rails#app().generator_command(<bang>0,'generate',<f-args>)
-  command! -buffer -bang -bar -nargs=* -complete=customlist,s:Complete_generate Generate      :execute rails#app().generator_command(<bang>0,'generate',<f-args>)
   command! -buffer -bar -nargs=*       -complete=customlist,s:Complete_destroy  Rdestroy      :execute rails#app().generator_command(1,'destroy',<f-args>)
-  command! -buffer -bar -nargs=*       -complete=customlist,s:Complete_destroy  Destroy       :execute rails#app().generator_command(1,'destroy',<f-args>)
   command! -buffer -bar -nargs=? -bang -complete=customlist,s:Complete_server   Rserver       :execute rails#app().server_command(<bang>0,<q-args>)
-  command! -buffer -bar -nargs=? -bang -complete=customlist,s:Complete_server   Server        :execute rails#app().server_command(<bang>0,<q-args>)
   command! -buffer -bang -nargs=? -range=0 -complete=customlist,s:Complete_edit Rrunner       :execute rails#buffer().runner_command(<bang>0, <count>?<line1>:0, <q-args>)
-  command! -buffer -bang -nargs=? -range=0 -complete=customlist,s:Complete_edit Runner        :execute rails#buffer().runner_command(<bang>0, <count>?<line1>:0, <q-args>)
   command! -buffer       -nargs=1 -range=0 -complete=customlist,s:Complete_ruby Rp            :execute rails#app().output_command(<count>==<line2>?<count>:-1, 'p begin '.<q-args>.' end')
   command! -buffer       -nargs=1 -range=0 -complete=customlist,s:Complete_ruby Rpp           :execute rails#app().output_command(<count>==<line2>?<count>:-1, 'require %{pp}; pp begin '.<q-args>.' end')
 endfunction
@@ -1697,9 +1664,9 @@ function! s:readable_runner_command(bang, count, arg) dict abort
           let extra = ''
         endif
       endif
-    elseif arg =~# '^spec\%(/.*\%(_spec\.rb\|\.feature\)\)\=$'
+    elseif arg =~# '^spec/.*\%(_spec\.rb\|\.feature\)$'
       let compiler = 'rspec'
-    elseif arg =~# '^features\%(/.*\.feature\)\=$'
+    elseif arg =~# '^features/.*\.feature$'
       let compiler = 'cucumber'
     else
       let compiler = 'ruby'
@@ -1816,8 +1783,8 @@ function! s:app_server_command(bang,arg) dict
 endfunction
 
 function! s:color_efm(pre, before, after)
-   return a:pre . '%\S%\+  %#' . a:before . "\e[0m  %#" . a:after . ',' .
-         \ a:pre . '%\s %#'.a:before.'  %#'.a:after . ','
+   return a:pre . '%\S%#  %#' . a:before . "\e[0m  %#" . a:after . ',' .
+         \ a:pre . '   %#'.a:before.' %#'.a:after . ','
 endfunction
 
 let s:efm_generate =
@@ -1827,7 +1794,6 @@ let s:efm_generate =
       \ s:color_efm('%-G', 'create', ' ') .
       \ s:color_efm('%-G', 'exist', ' ') .
       \ s:color_efm('Overwrite%.%#', '%m', '%f') .
-      \ s:color_efm('', '%m', '   %f') .
       \ s:color_efm('', '%m', '%f') .
       \ '%-G%.%#'
 
@@ -1841,17 +1807,17 @@ function! s:app_generator_command(bang,...) dict
     let &l:makeprg = self.prepare_rails_command(cmd)
     let &l:errorformat = s:efm_generate
     call s:push_chdir(1)
-    noautocmd make!
+    if a:bang
+      make!
+    else
+      make
+    endif
   finally
     call s:pop_command()
     let &l:errorformat = old_errorformat
     let &l:makeprg = old_makeprg
   endtry
-  if a:bang || empty(getqflist())
-    return ''
-  else
-    return 'cfirst'
-  endif
+  return ''
 endfunction
 
 call s:add_methods('app', ['generators','script_command','output_command','server_command','generator_command'])
@@ -2247,23 +2213,23 @@ function! s:RailsFind()
   return res
 endfunction
 
-function! s:app_named_route_file(route) dict abort
+function! s:app_named_route_file(route) dict
   call self.route_names()
   if self.cache.has("named_routes") && has_key(self.cache.get("named_routes"),a:route)
-    return s:sub(self.cache.get("named_routes")[a:route].handler, '#', '_controller.rb#')
+    return self.cache.get("named_routes")[a:route]
   endif
   return ""
 endfunction
 
-function! s:app_route_names() dict abort
+function! s:app_route_names() dict
   if self.cache.needs("named_routes")
+    let exec = "ActionController::Routing::Routes.named_routes.each {|n,r| puts %{#{n} #{r.requirements[:controller]}_controller.rb##{r.requirements[:action]}}}"
+    let string = self.eval(exec)
     let routes = {}
-    for line in split(system(self.rake_command().' routes'), "\n")
-      let matches = matchlist(line, '^ \+\(\w\+\) \+\(\u\+\) \+\(\S\+\) \+\(\w\+#\w\+\)')
-      if !empty(matches)
-        let [_, name, method, path, handler; __] = matches
-        let routes[name] = {'method': method, 'path': path, 'handler': handler}
-      endif
+    for line in split(string,"\n")
+      let route = split(line," ")
+      let name = route[0]
+      let routes[name] = route[1]
     endfor
     call self.cache.set("named_routes",routes)
   endif
@@ -2272,6 +2238,10 @@ function! s:app_route_names() dict abort
 endfunction
 
 call s:add_methods('app', ['route_names','named_route_file'])
+
+function! RailsNamedRoutes()
+  return rails#app().route_names()
+endfunction
 
 function! s:RailsIncludefind(str,...)
   if a:str ==# "ApplicationController"
@@ -2482,10 +2452,7 @@ function! s:BufProjectionCommands()
   endfor
 endfunction
 
-function! s:completion_filter(results, A, ...) abort
-  if exists('*projectionist#completion_filter')
-    return projectionist#completion_filter(a:results, a:A, a:0 ? a:1 : '/')
-  endif
+function! s:completion_filter(results,A)
   let results = sort(type(a:results) == type("") ? split(a:results,"\n") : copy(a:results))
   call filter(results,'v:val !~# "\\~$"')
   if a:A =~# '\*'
@@ -2814,7 +2781,7 @@ endfunc
 
 let s:view_types = split('rhtml,erb,rxml,builder,rjs,haml',',')
 
-function! s:readable_resolve_view(name, ...) dict abort
+function! s:readable_resolve_view(name,...) dict abort
   let name = a:name
   let pre = 'app/views/'
   if name !~# '/'
@@ -2823,9 +2790,7 @@ function! s:readable_resolve_view(name, ...) dict abort
       let name = controller.'/'.name
     endif
   endif
-  if name =~# '/' && !self.app().has_path(fnamemodify('app/views/'.name, ':h'))
-    return ''
-  elseif name =~# '\.\w\+\.\w\+$' || name =~# '\.\%('.join(s:view_types,'\|').'\)$'
+  if name =~# '\.\w\+\.\w\+$' || name =~# '\.\%('.join(s:view_types,'\|').'\)$'
     return pre.name
   else
     for format in ['.'.self.format(a:0 ? a:1 : 0), '']
@@ -2862,7 +2827,7 @@ function! s:findlayout(name)
   return rails#buffer().resolve_layout(a:name, line('.'))
 endfunction
 
-function! s:viewEdit(cmd, ...) abort
+function! s:viewEdit(cmd,...)
   if a:0 && a:1 =~ '^[^!#:]'
     let view = matchstr(a:1,'[^!#:]*')
   elseif rails#buffer().type_name('controller','mailer')
@@ -2882,16 +2847,12 @@ function! s:viewEdit(cmd, ...) abort
   endif
   let found = rails#buffer().resolve_view(view, line('.'))
   let djump = a:0 ? matchstr(a:1,'!.*\|#\zs.*\|:\zs\d*\ze\%(:in\)\=$') : ''
-  if !empty(found)
+  if found != ''
     call s:edit(a:cmd,found)
     call s:djump(djump)
     return ''
   elseif a:0 && a:1 =~# '!'
-    let file = 'app/views/'.view
-    if !rails#app().has_path(fnamemodify(file, ':h'))
-      call mkdir(rails#app().path(fnamemodify(file, ':h')), 'p')
-    endif
-    call s:edit(a:cmd, file)
+    call s:edit(a:cmd,'app/views/'.view)
     call s:djump(djump)
     return ''
   else
@@ -3095,11 +3056,8 @@ function! s:readable_open_command(cmd, argument, name, projections) dict abort
       if has_key(projection, 'template')
       let template = s:split(projection.template)
       let ph = {
-            \ 'match': root,
-            \ 'file': file,
-            \ 'project': self.app().path(),
-            \ 'S': rails#camelize(root),
-            \ 'h': toupper(root[0]) . tr(rails#underscore(root), '_', ' ')[1:-1]}
+              \ 'S': rails#camelize(root),
+              \ 'h': toupper(root[0]) . tr(rails#underscore(root), '_', ' ')[1:-1]}
         call map(template, 's:expand_placeholders(v:val, ph)')
       else
         let projected = self.app().file(relative).projected('template')
@@ -3285,27 +3243,13 @@ function! s:readable_alternate_candidates(...) dict abort
     return ['app/helpers/application_helper.rb']
   elseif f =~# 'spec\.js$'
     return [s:sub(s:sub(f, 'spec/javascripts', 'app/assets/javascripts'), '_spec.js', '.js')."\n"]
-  elseif f =~# 'spec\.coffee$'
-    return [s:sub(s:sub(f, 'spec/javascripts', 'app/assets/javascripts'), '_spec.coffee', '.coffee')."\n"]
-  elseif f =~# 'spec\.js\.coffee$'
-    return [s:sub(s:sub(f, 'spec/javascripts', 'app/assets/javascripts'), '_spec.js.coffee', '.js.coffee')."\n"]
   elseif self.type_name('javascript')
     if f =~ 'public/javascripts'
       let to_replace = 'public/javascripts'
     else
       let to_replace = 'app/assets/javascripts'
     endif
-    if f =~ '.coffee.js$'
-      let suffix = '.coffee.js'
-      let suffix_replacement = '_spec.coffee.js'
-    elseif f =~ '.coffee$'
-      let suffix = '.coffee'
-      let suffix_replacement = '_spec.coffee'
-    else
-      let suffix = '.js'
-      let suffix_replacement = '_spec.js'
-    endif
-    return [s:sub(s:sub(f, to_replace, 'spec/javascripts'), suffix, suffix_replacement)."\n"]
+    return [s:sub(s:sub(f, to_replace, 'spec/javascripts'), '.js', '_spec.js')."\n"]
   elseif self.type_name('db-schema') || f =~# '^db/\w*structure.sql$'
     return ['db/seeds.rb']
   elseif f ==# 'db/seeds.rb'
@@ -3733,7 +3677,7 @@ function! rails#buffer_syntax()
         syn keyword rubyRailsMethod params request response session headers cookies flash
       endif
       if buffer.type_name() ==# 'model' || buffer.type_name('model-arb')
-        syn keyword rubyRailsARMethod default_scope enum named_scope scope serialize store
+        syn keyword rubyRailsARMethod default_scope named_scope scope serialize store
         syn keyword rubyRailsARAssociationMethod belongs_to has_one has_many has_and_belongs_to_many composed_of accepts_nested_attributes_for
         syn keyword rubyRailsARCallbackMethod before_create before_destroy before_save before_update before_validation before_validation_on_create before_validation_on_update
         syn keyword rubyRailsARCallbackMethod after_create after_destroy after_save after_update after_validation after_validation_on_create after_validation_on_update
@@ -3925,7 +3869,7 @@ function! rails#log_syntax()
   endif
   syn match   railslogRender      '\%(^\s*\%(\e\[[0-9;]*m\)\=\)\@<=\%(Started\|Processing\|Rendering\|Rendered\|Redirected\|Completed\)\>'
   syn match   railslogComment     '^\s*# .*'
-  syn match   railslogModel       '\%(^\s*\%(\e\[[0-9;]*m\)*\)\@<=\u\%(\w\|:\)* \%(Load\%( Including Associations\| IDs For Limited Eager Loading\)\=\|Columns\|Exists\|Count\|Create\|Update\|Destroy\|Delete all\)\>' skipwhite nextgroup=railslogModelNum,railslogEscapeMN
+  syn match   railslogModel       '\%(^\s*\%(\e\[[0-9;]*m\)*\)\@<=\u\%(\w\|:\)* \%(Load\%( Including Associations\| IDs For Limited Eager Loading\)\=\|Columns\|Count\|Create\|Update\|Destroy\|Delete all\)\>' skipwhite nextgroup=railslogModelNum,railslogEscapeMN
   syn match   railslogModel       '\%(^\s*\%(\e\[[0-9;]*m\)*\)\@<=\%(SQL\|CACHE\)\>' skipwhite nextgroup=railslogModelNum,railslogEscapeMN
   syn region  railslogModelNum    start='(' end=')' contains=railslogNumber contained skipwhite
   syn match   railslogNumber      '\<\d\+\>%'
@@ -4409,88 +4353,30 @@ endfunction
 
 call s:add_methods('app', ['gems', 'has_gem', 'engines', 'projections'])
 
-let s:transformations = {}
-
-function! s:transformations.dot(input, o) abort
-  return substitute(a:input, '/', '.', 'g')
-endfunction
-
-function! s:transformations.underscore(input, o) abort
-  return substitute(a:input, '/', '_', 'g')
-endfunction
-
-function! s:transformations.colons(input, o) abort
-  return substitute(a:input, '/', '::', 'g')
-endfunction
-
-function! s:transformations.hyphenate(input, o) abort
-  return tr(a:input, '_', '-')
-endfunction
-
-function! s:transformations.blank(input, o) abort
-  return tr(a:input, '_-', '  ')
-endfunction
-
-function! s:transformations.uppercase(input, o) abort
-  return toupper(a:input)
-endfunction
-
-function! s:transformations.camelcase(input, o) abort
-  return substitute(a:input, '[_-]\(.\)', '\u\1', 'g')
-endfunction
-
-function! s:transformations.capitalize(input, o) abort
-  return substitute(a:input, '\%(^\|/\)\zs\(.\)', '\u\1', 'g')
-endfunction
-
-function! s:transformations.dirname(input, o) abort
-  return substitute(a:input, '.[^\/]*$', '', '')
-endfunction
-
-function! s:transformations.basename(input, o) abort
-  return substitute(a:input, '.*[\/]', '', '')
-endfunction
-
-function! s:transformations.plural(input, o) abort
-  return rails#pluralize(a:input)
-endfunction
-
-function! s:transformations.singular(input, o) abort
-  return rails#singularize(a:input)
-endfunction
-
-function! s:transformations.open(input, o) abort
-  return '{'
-endfunction
-
-function! s:transformations.close(input, o) abort
-  return '}'
-endfunction
-
-function! s:expand_placeholder(placeholder, expansions) abort
-  let transforms = split(a:placeholder[1:-2], '|')
-  if has_key(a:expansions, get(transforms, 0, '}'))
-    let value = a:expansions[remove(transforms, 0)]
-  elseif has_key(a:expansions, 'match')
-    let value = a:expansions.match
-  else
-    return "\001"
-  endif
-  for transform in transforms
-    if !has_key(s:transformations, transform)
-      return "\001"
-    endif
-    let value = s:transformations[transform](value, a:expansions)
-  endfor
-  return value
-endfunction
-
 function! s:expand_placeholders(string, placeholders)
   if type(a:string) !=# type('')
     return a:string
   endif
   let ph = extend({'%': '%'}, a:placeholders)
-  let value = substitute(a:string, '{[^{}]*}', '\=s:expand_placeholder(submatch(0), ph)', 'g')
+  let transitional = {
+        \ '{}': '%s',
+        \ '{capitalize|camelcase|colons}': '%S',
+        \ '{capitalize|camelcase|dot}': '%S',
+        \ '{camelcase|capitalize|colons}': '%S',
+        \ '{camelcase|capitalize|dot}': '%S',
+        \ '{plural}': '%p',
+        \ '{pluralize}': '%p',
+        \ '{singular}': '%i',
+        \ '{singularize}': '%i',
+        \ '{capitalize|blank}': '%h',
+        \ '{underscore|capitalize|blank}': '%h',
+        \ '{line}': '%l',
+        \ '{lnum}': '%l',
+        \ '{define}': '%d',
+        \ '{file}': '%%',
+        \ '{open}': '{',
+        \ '{close}': '}'}
+  let value = substitute(a:string, '{[^{}]*}', '\=get(transitional, submatch(0), submatch(0))', 'g')
   let value = substitute(value, '%\([^: ]\)', '\=get(ph, submatch(1), "\001")', 'g')
   return value =~# "\001" ? '' : value
 endfunction
@@ -4500,16 +4386,13 @@ function! s:readable_projected(key, ...) dict abort
   let all = self.app().projections()
   let mine = []
   if has_key(all, f)
-    let mine += map(s:getlist(all[f], a:key), 's:expand_placeholders(v:val, a:0 ? a:1 : {})')
+    let mine += map(s:getlist(all[f], a:key), 's:expand_placeholders(v:val, a:0 ? a:1 : 0)')
   endif
   for pattern in reverse(sort(filter(keys(all), 'v:val =~# "^[^*{}]*\\*[^*{}]*$"'), s:function('rails#lencmp')))
     let [prefix, suffix; _] = split(pattern, '\*', 1)
     if s:startswith(f, prefix) && s:endswith(f, suffix)
       let root = f[strlen(prefix) : -strlen(suffix)-1]
       let ph = extend({
-            \ 'match': root,
-            \ 'file': self.path(),
-            \ 'project': self.app().path(),
             \ 's': root,
             \ 'S': rails#camelize(root),
             \ 'h': toupper(root[0]) . tr(rails#underscore(root), '_', ' ')[1:-1],
@@ -4605,8 +4488,6 @@ function! rails#buffer_setup() abort
     endif
     if exists(':UltiSnipsAddFiletypes') == 2
       UltiSnipsAddFiletypes rails
-    elseif exists(':SnipMateLoadScope') == 2
-      SnipMateLoadScope rails
     endif
   elseif ft =~# 'yaml\>' || fnamemodify(self.name(),':e') ==# 'yml'
     call self.setvar('&define',self.define_pattern())
@@ -4640,18 +4521,6 @@ function! rails#buffer_setup() abort
         call self.setvar('surround_101', "<% \r %>\n<% end %>")
       endif
     endif
-  endif
-  if self.type_name('test', 'spec', 'cucumber')
-    call self.setvar('dispatch', ':Runner')
-  elseif self.name() ==# 'Rakefile'
-    call self.setvar('dispatch', ':Rake default')
-  elseif self.name() =~# '^\%(app\|config\|db\|lib\|log\)'
-    call self.setvar('dispatch', ':Rake')
-  elseif self.name() =~# '^public'
-    call self.setvar('dispatch', ':Preview')
-  endif
-  if empty(self.getvar('start'))
-    call self.setvar('start', ':Rserver')
   endif
 endfunction
 
