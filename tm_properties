@@ -8,4 +8,4 @@ softWrap         = true
 softTabs         = true
 tabSize          = 2
 
-TM_RUBY = /Users/bgamble/.rvm/bin/rvm-auto-ruby
+TM_RUBY = $HOME/.rvm/bin/rvm-auto-ruby
