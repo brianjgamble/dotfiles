@@ -52,6 +52,8 @@ colorscheme hybrid
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'     " Use silver searcher
+let g:ctrlp_use_caching = 0
 
 " Load mappings
 source $HOME/.vim/mappings.vim
