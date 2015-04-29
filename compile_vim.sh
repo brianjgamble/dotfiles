@@ -3,7 +3,7 @@
 ./configure --disable-darwin \
             --enable-gui=no \
             --without-x \
-            --with-features=huge \
+            --with-features=normal \
             --disable-gpm \
             --enable-cscope \
             --enable-multibyte \
