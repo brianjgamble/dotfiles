@@ -9,3 +9,6 @@ softTabs         = true
 tabSize          = 2
 
 TM_RUBY = $HOME/.rvm/bin/rvm-auto-ruby
+
+[ text.plain ]
+spellChecking    = true
