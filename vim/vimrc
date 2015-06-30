@@ -46,7 +46,7 @@ set cursorline                    " Highlights current line
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-colorscheme hybrid
+colorscheme hybrid_reverse
 
 " Configure CtrlP
 let g:ctrlp_map = '<leader>t'
