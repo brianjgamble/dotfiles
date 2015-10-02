@@ -3,7 +3,7 @@ colors
 setopt prompt_subst
 PROMPT='
 [ %{$fg[cyan]%}%n%{$reset_color%}: %~%{$fg_bold[white]%}%{$reset_color%}$(parse_git_branch) :: %{$fg[yellow]%}$(~/.rvm/bin/rvm-prompt)%{$reset_color%} ]
-→ %{$reset_color%}'
+→ '
 
 # Set RPROMPT to have info show up on the right, too.
 
