@@ -14,6 +14,3 @@ map <leader>tm :tabmove
 
 " switch between files
 map ,, <C-^>
-
-" run all specs
-map <leader>r :w\|!rspec spec<cr>
