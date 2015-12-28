@@ -2,5 +2,5 @@
 ## Values used by other scripts and applications
 ##
 export EDITOR="/usr/local/bin/vim"
-#export JAVA_HOME=`/usr/libexec/java_home`
-export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export RUBY_DIR="$HOME/.rubies/ruby-2.3.0/bin"
+export PATH="$RUBY_DIR:$HOME/bin:/usr/local/bin:$PATH"
