@@ -2,5 +2,5 @@
 ## Values used by other scripts and applications
 ##
 export EDITOR="/usr/local/bin/vim"
-export RUBY_DIR="$HOME/.rubies/ruby-2.3.0/bin"
+export RUBY_DIR="$HOME/.rubies/ruby-2.3.1/bin"
 export PATH="$RUBY_DIR:$HOME/bin:/usr/local/bin:$PATH"
