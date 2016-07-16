@@ -11,7 +11,5 @@ tabSize          = 2
 include = "{$include,.*}"
 exclude = "{$exclude,.git}"
 
-TM_RUBY = $HOME/.rvm/bin/rvm-auto-ruby
-
 [ text.plain ]
 spellChecking    = true
