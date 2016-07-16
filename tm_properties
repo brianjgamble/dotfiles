@@ -12,4 +12,7 @@ include = "{$include,.*}"
 exclude = "{$exclude,.git}"
 
 [ text.plain ]
-spellChecking    = true
+spellChecking = true
+
+[ *.{txt,md,mdown,markdown} ]
+spellChecking = true
