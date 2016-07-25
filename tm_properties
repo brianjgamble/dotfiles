@@ -1,0 +1,18 @@
+# Settings
+encoding         = UTF-8
+fontName         = "Courier Prime Code"
+fontSize         = 18
+lineEndings      = '\n'
+showInvisibles   = false
+softWrap         = true
+softTabs         = true
+tabSize          = 2
+
+include = "{$include,.*}"
+exclude = "{$exclude,.git}"
+
+[ text.plain ]
+spellChecking = true
+
+[ *.{txt,md,mdown,markdown} ]
+spellChecking = true
