@@ -8,7 +8,7 @@ set cpo&vim
 " syncing starts 2000 lines before top line so docstrings don't screw things up
 syn sync minlines=2000
 
-syn cluster elixirNotTop contains=@elixirRegexSpecial,@elixirStringContained,@elixirDeclaration,elixirTodo,elixirArguments,elixirBlockDefinition
+syn cluster elixirNotTop contains=@elixirRegexSpecial,@elixirStringContained,@elixirDeclaration,elixirTodo,elixirArguments,elixirBlockDefinition,elixirUnusedVariable
 syn cluster elixirRegexSpecial contains=elixirRegexEscape,elixirRegexCharClass,elixirRegexQuantifier,elixirRegexEscapePunctuation
 syn cluster elixirStringContained contains=elixirInterpolation,elixirRegexEscape,elixirRegexCharClass
 syn cluster elixirDeclaration contains=elixirFunctionDeclaration,elixirModuleDeclaration,elixirProtocolDeclaration,elixirImplDeclaration,elixirRecordDeclaration,elixirMacroDeclaration,elixirDelegateDeclaration,elixirOverridableDeclaration,elixirExceptionDeclaration,elixirCallbackDeclaration,elixirStructDeclaration
@@ -37,7 +37,7 @@ syn keyword elixirInclude import require alias use
 syn keyword elixirSelf self
 
 " This unfortunately also matches function names in function calls
-syn match elixirUnusedVariable '\(([^)]*\)\@<=\<_\w*\>'
+syn match elixirUnusedVariable contained '\<_\w*\>'
 
 syn keyword elixirOperator and not or in
 syn match   elixirOperator '!==\|!=\|!'
@@ -107,13 +107,33 @@ syn region elixirSigil matchgroup=elixirSigilDelimiter start="\~\l{"            
 syn region elixirSigil matchgroup=elixirSigilDelimiter start="\~\l<"                end=">"   skip="\\\\\|\\>"   contains=@elixirStringContained,elixirRegexEscapePunctuation fold
 syn region elixirSigil matchgroup=elixirSigilDelimiter start="\~\l\["               end="\]"  skip="\\\\\|\\\]"  contains=@elixirStringContained,elixirRegexEscapePunctuation fold
 syn region elixirSigil matchgroup=elixirSigilDelimiter start="\~\l("                end=")"   skip="\\\\\|\\)"   contains=@elixirStringContained,elixirRegexEscapePunctuation fold
+syn region elixirSigil matchgroup=elixirSigilDelimiter start="\~\l\/"               end="\/"  skip="\\\\\|\\\/"  contains=@elixirStringContained,elixirRegexEscapePunctuation fold
 
-" Sigils surrounded with docString
+" Sigils surrounded with heredoc
 syn region elixirSigil matchgroup=elixirSigilDelimiter start=+\~\a\z("""\)+ end=+^\s*\zs\z1\s*$+ skip=+\\"+ fold
 syn region elixirSigil matchgroup=elixirSigilDelimiter start=+\~\a\z('''\)+ end=+^\s*\zs\z1\s*$+ skip=+\\'+ fold
 
-syn region elixirDocString matchgroup=elixirStringDelimiter start=+\%(@\w*doc\s\+\)\@<=\z("""\)+ end=+\z1+ contains=elixirTodo,elixirInterpolation,@Spell fold
-syn region elixirDocString matchgroup=elixirSigilDelimiter  start=+\%(@\w*doc\s\+\)\@<=\~[Ss]\z('''\|"""\)+ end=+\z1+ contains=elixirTodo,elixirInterpolation,@Spell fold
+" Documentation
+if exists('g:elixir_use_markdown_for_docs') && g:elixir_use_markdown_for_docs
+  syn include @markdown syntax/markdown.vim
+  syn cluster elixirDocStringContained contains=@markdown,@Spell
+else
+  let g:elixir_use_markdown_for_docs = 0
+  syn cluster elixirDocStringContained contains=elixirDocTest,elixirTodo,@Spell
+
+  " doctests
+  syn region elixirDocTest start="^\s*\%(iex\|\.\.\.\)\%((\d*)\)\?>\s" end="^\s*$" contained
+endif
+
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start="\%(@\w*doc\s\+\)\@<=\~S\z(/\|\"\|'\||\){1}" end="\z1" skip="\\\\\|\\\z1" contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start="\%(@\w*doc\s\+\)\@<=\~S{"                   end="}"   skip="\\\\\|\\}"   contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start="\%(@\w*doc\s\+\)\@<=\~S<"                   end=">"   skip="\\\\\|\\>"   contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start="\%(@\w*doc\s\+\)\@<=\~S\["                  end="\]"  skip="\\\\\|\\\]"  contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start="\%(@\w*doc\s\+\)\@<=\~S("                   end=")"   skip="\\\\\|\\)"   contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirStringDelimiter start=+\%(@\w*doc\s\+\)\@<=\z("\)+                 end=+\z1+ skip=+\\\\\|\\\z1+  contains=@markdown,@Spell
+syn region elixirDocString matchgroup=elixirStringDelimiter start=+\%(@\w*doc\s\+\)\@<=\z("""\)+               end=+\z1+ contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start=+\%(@\w*doc\s\+\)\@<=\~[Ss]\z('''\)+ end=+\z1+ skip=+\\'+ contains=@elixirDocStringContained fold
+syn region elixirDocString matchgroup=elixirSigilDelimiter  start=+\%(@\w*doc\s\+\)\@<=\~[Ss]\z("""\)+ end=+\z1+ skip=+\\"+ contains=@elixirDocStringContained fold
 
 " Defines
 syn keyword elixirDefine              def            nextgroup=elixirFunctionDeclaration    skipwhite skipnl
@@ -181,6 +201,7 @@ hi def link elixirSelf                   Identifier
 hi def link elixirUnusedVariable         Comment
 hi def link elixirNumber                 Number
 hi def link elixirDocString              Comment
+hi def link elixirDocTest                elixirKeyword
 hi def link elixirAtomInterpolated       elixirAtom
 hi def link elixirRegex                  elixirString
 hi def link elixirRegexEscape            elixirSpecial
