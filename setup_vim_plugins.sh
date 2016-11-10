@@ -3,7 +3,25 @@
 PLUGINS_DIR=~/bin/dotfiles/vim-plugins
 VIM_DIR=~/bin/dotfiles/vim
 
-# setup plugin directories
+# retrieve vim plugins sources
+mkdir -p $PLUGINS_DIR
+cd $PLUGINS_DIR
+
+if [ ! -d "ctrlp.vim" ]; then
+  git clone https://github.com/ctrlpvim/ctrlp.vim.git
+fi
+
+if [ ! -d "vim-elixir" ]; then
+  git clone https://github.com/elixir-lang/vim-elixir.git
+fi
+
+if [ ! -d "vim-rails" ]; then
+  git clone https://github.com/tpope/vim-rails.git 
+fi
+
+cd ..
+
+# setup vim plugin directories
 mkdir -p $VIM_DIR/autoload
 mkdir -p $VIM_DIR/compiler
 mkdir -p $VIM_DIR/ftdetect
