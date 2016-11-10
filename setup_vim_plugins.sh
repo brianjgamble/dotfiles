@@ -55,8 +55,3 @@ VIM_RAILS_DIR=$PLUGINS_DIR/vim-rails
 ln -nfs $VIM_RAILS_DIR/autoload/rails.vim $VIM_DIR/autoload/rails.vim
 ln -nfs $VIM_RAILS_DIR/compiler/rails.vim $VIM_DIR/compiler/rails.vim
 ln -nfs $VIM_RAILS_DIR/plugin/rails.vim $VIM_DIR/plugin/rails.vim
-
-# miscellaneous
-ln -nfs $PLUGINS_DIR/c.vim $VIM_DIR/ftplugin/c.vim
-ln -nfs $PLUGINS_DIR/make.vim $VIM_DIR/ftplugin/make.vim
-ln -nfs $PLUGINS_DIR/ruby.vim $VIM_DIR/ftplugin/ruby.vim
