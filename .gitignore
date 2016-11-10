@@ -3,3 +3,13 @@
 vim/doc/tags
 zsh/local_env
 .netrwhist
+
+# Vim related directories to ignore
+vim-plugins
+vim/autoload
+vim/compiler
+vim/ftdetect
+vim/ftplugin
+vim/indent
+vim/plugin
+vim/syntax
