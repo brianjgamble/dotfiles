@@ -40,6 +40,7 @@ ln -nfs $CTRLP_DIR/plugin/ctrlp.vim $VIM_DIR/plugin/ctrlp.vim
 # vim-elixir
 VIM_ELIXIR_DIR=$PLUGINS_DIR/vim-elixir
 
+ln -nfs $VIM_ELIXIR_DIR/autoload/elixir $VIM_DIR/autoload/elixir
 ln -nfs $VIM_ELIXIR_DIR/compiler/exunit.vim $VIM_DIR/compiler/exunit.vim
 ln -nfs $VIM_ELIXIR_DIR/ftdetect/elixir.vim $VIM_DIR/ftdetect/elixir.vim
 ln -nfs $VIM_ELIXIR_DIR/ftplugin/eelixir.vim $VIM_DIR/ftplugin/eelixir.vim
