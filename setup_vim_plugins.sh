@@ -19,6 +19,10 @@ if [ ! -d "vim-rails" ]; then
   git clone https://github.com/tpope/vim-rails.git 
 fi
 
+if [ ! -d "html5.vim" ]; then
+  git clone https://github.com/othree/html5.vim
+fi
+
 cd ..
 
 # setup vim plugin directories
@@ -56,3 +60,13 @@ VIM_RAILS_DIR=$PLUGINS_DIR/vim-rails
 ln -nfs $VIM_RAILS_DIR/autoload/rails.vim $VIM_DIR/autoload/rails.vim
 ln -nfs $VIM_RAILS_DIR/compiler/rails.vim $VIM_DIR/compiler/rails.vim
 ln -nfs $VIM_RAILS_DIR/plugin/rails.vim $VIM_DIR/plugin/rails.vim
+
+# html5
+HTML5_DIR=$PLUGINS_DIR/html5.vim
+ln -nfs $HTML5_DIR/autoload/htmlcomplete.vim $VIM_DIR/autoload/htmlcomplete.vim
+ln -nfs $HTML5_DIR/autoload/xml $VIM_DIR/autoload/xml
+ln -nfs $HTML5_DIR/ftplugin/html.vim $VIM_DIR/ftplugin/html.vim
+ln -nfs $HTML5_DIR/indent/html.vim $VIM_DIR/indent/html.vim
+ln -nfs $HTML5_DIR/syntax/html.vim $VIM_DIR/syntax/html.vim
+ln -nfs $HTML5_DIR/syntax/html $VIM_DIR/syntax/html
+ln -nfs $HTML5_DIR/syntax/javascript $VIM_DIR/syntax/javascript
