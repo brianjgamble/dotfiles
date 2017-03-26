@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ $1 -eq 0 ]] ; then
+if [ -z "$1" ] ; then
   echo "Please specify the erlang version to install."
   exit 1
 fi
