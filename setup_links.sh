@@ -8,3 +8,4 @@ ln -nfs ~/bin/dotfiles/vim/agignore ~/.agignore
 ln -nfs ~/bin/dotfiles/tmux.conf ~/.tmux.conf
 ln -nfs ~/bin/dotfiles/tm_properties ~/.tm_properties
 ln -nfs ~/bin/dotfiles/gitconfig ~/.gitconfig
+ln -nfs ~/bin/dotfiles/misc/audio_links.m3u ~/audio_links.m3u
