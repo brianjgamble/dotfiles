@@ -48,7 +48,7 @@ set cursorline                    " Highlights current line
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
 set background=dark
-colorscheme jellybeans
+colorscheme hybrid
 
 " Configure CtrlP and use The Silver Searcher
 let g:ctrlp_map = '<leader>t'
