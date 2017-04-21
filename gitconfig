@@ -8,3 +8,5 @@
 	status = auto
 [apply]
 	whitespace = nowarn
+[core]
+	excludesfile = ~/.gitignore
