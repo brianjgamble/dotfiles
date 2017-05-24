@@ -50,6 +50,12 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLo
 set background=dark
 colorscheme hybrid
 
+set list
+set listchars=trail:•
+
+"Invisible character colors
+highlight SpecialKey ctermfg=lightcyan
+
 " Configure CtrlP and use The Silver Searcher
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
