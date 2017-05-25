@@ -14,3 +14,6 @@ map <leader>tm :tabmove
 
 " switch between files
 map ,, <C-^>
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>

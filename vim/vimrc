@@ -33,7 +33,7 @@ set visualbell                    " No beeping.
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
 set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
-
+   
 set tabstop=2                     " Global tab width.
 set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
@@ -50,10 +50,8 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLo
 set background=dark
 colorscheme hybrid
 
-set list
+" Highlight trailing whitespace
 set listchars=trail:•
-
-"Invisible character colors
 highlight SpecialKey ctermfg=lightcyan
 
 " Configure CtrlP and use The Silver Searcher
