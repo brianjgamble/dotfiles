@@ -1,11 +1,13 @@
 #!/bin/sh
 
-./configure --disable-darwin \
-            --enable-gui=no \
+./configure --enable-gui=no \
             --without-x \
             --with-features=normal \
             --disable-gpm \
             --disable-nls \
             --with-tlib=ncurses \
-            --disable-netbeans
+            --disable-netbeans \
+            --enable-terminal \
+            --with-tlib=ncurses
+
 make
