@@ -12,9 +12,6 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" Map File explorer
-map <leader>e :Vexplore <cr>
-
 " switch between files
 map ,, <C-^>
 
