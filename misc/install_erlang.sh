@@ -5,4 +5,5 @@ if [ -z "$1" ] ; then
   exit 1
 fi
 
-ERLANG_EXTRA_CONFIGURE_OPTIONS="--disable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --without-odbc --enable-darwin-64bit --without-javac" asdf install erlang $1
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-odbc"
+asdf install erlang $1
