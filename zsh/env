@@ -1,7 +1,6 @@
 ##
 ## Values used by other scripts and applications
 ##
-export EDITOR="/usr/local/bin/vim"
 
 # Enable history in IEX
 export ERL_AFLAGS="-kernel shell_history enabled"
