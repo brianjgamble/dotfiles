@@ -5,3 +5,7 @@ http://ice2.somafm.com/groovesalad-64-aac
 http://ice2.somafm.com/spacestation-64-aac
 #EXTINF:0,Dub Step Beyond [SomaFM]
 http://ice2.somafm.com/dubstep-64-aac
+#EXTINF:0,RPGamers Network Radio (RPGN Radio)
+http://stream.rpgamers.net:8000/rpgn
+#EXTINF:0,Radio Rivendell (SE)
+http://radiorivendell.ddns.net:8000/128kbit.mp3
