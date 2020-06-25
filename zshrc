@@ -7,6 +7,6 @@ fi
 
 # asdf files
 if [ -d "$HOME/.asdf" ]; then
-  . $HOME/.asdf/asdf.sh
+  . $(brew --prefix asdf)/asdf.sh
 fi
 

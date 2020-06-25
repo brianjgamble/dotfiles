@@ -13,3 +13,6 @@ vim/ftplugin
 vim/indent
 vim/plugin
 vim/syntax
+
+# Ignore local fish config
+fish/local.fish
