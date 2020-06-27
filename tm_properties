@@ -1,6 +1,6 @@
 # Settings
 encoding         = UTF-8
-fontName         = "Source Code Variable"
+fontName         = "Source Code Pro"
 fontSize         = 16
 lineEndings      = '\n'
 showInvisibles   = false
