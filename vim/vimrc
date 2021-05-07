@@ -1,6 +1,10 @@
 set nocompatible                  " Must come first because it changes other options.
 
-syntax enable                     " Turn on syntax highlighting.
+" syntax enable                     " Turn on syntax highlighting.
+if !exists("g:syntax_on")
+    syntax enable
+endif
+
 filetype plugin indent on         " Turn on file type detection.
 
 set showcmd                       " Display incomplete commands.
@@ -49,7 +53,7 @@ set lazyredraw
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-colorscheme hybrid
+colorscheme atom-dark-256
 set background=dark
 
 " Highlight trailing whitespace
