@@ -23,6 +23,10 @@ if [ ! -d "html5.vim" ]; then
   git clone https://github.com/othree/html5.vim
 fi
 
+if [ ! -d "rspec.vim" ]; then
+  git clone https://github.com/keith/rspec.vim
+fi
+
 cd ..
 
 # setup vim plugin directories
@@ -70,3 +74,9 @@ ln -nfs $HTML5_DIR/indent/html.vim $VIM_DIR/indent/html.vim
 ln -nfs $HTML5_DIR/syntax/html.vim $VIM_DIR/syntax/html.vim
 ln -nfs $HTML5_DIR/syntax/html $VIM_DIR/syntax/html
 ln -nfs $HTML5_DIR/syntax/javascript $VIM_DIR/syntax/javascript
+
+# rspec.vim
+RSPEC_VIM_DIR=$PLUGINS_DIR/rspec.vim
+
+ln -nfs $RSPEC_VIM_DIR/after/ftdetect/rspec.vim $VIM_DIR/ftdetect/rspec.vim
+ln -nfs $RSPEC_VIM_DIR/after/syntax/rspec.vim $VIM_DIR/syntax/rspec.vim
