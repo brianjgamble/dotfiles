@@ -5,14 +5,7 @@ zsh/local_env
 .netrwhist
 
 # Vim related directories to ignore
-vim-plugins
-vim/autoload
-vim/compiler
-vim/ftdetect
-vim/ftplugin
-vim/indent
-vim/plugin
-vim/syntax
+vim/plugged
 
 # Ignore local fish config
 fish/local.fish
