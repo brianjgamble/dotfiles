@@ -16,6 +16,8 @@ if !exists("g:syntax_on")
 endif
 
 filetype plugin indent on         " Turn on file type detection.
+filetype on
+filetype indent on
 
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
