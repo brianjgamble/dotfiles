@@ -13,7 +13,7 @@ function parse_git_branch {
 
 # miscellaneous
 alias h="history"
-alias l="ls -laGh"
+alias l="ls -laGhp"
 
 # processes
 alias tu="top -o cpu" # cpu
