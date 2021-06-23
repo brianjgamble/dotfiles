@@ -1,6 +1,8 @@
 #!/bin/sh
 
-./configure --enable-multibyte \
+./configure --prefix=$HOME/local \
+            --with-local-dir=$HOME/local \
+            --enable-multibyte \
             --with-lib=ncurses \
             --enable-cscope \ 
             --enable-terminal \
