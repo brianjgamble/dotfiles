@@ -1,16 +1,11 @@
 function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
 
-    # User
-    set_color $fish_color_user
-    echo -n $USER
-    set_color normal
-
-    echo -n ': '
-
     # PWD
     set_color $fish_color_cwd
+    echo -n '[ '
     echo -n (prompt_pwd)
+    echo -n ' ]'
     set_color normal
 
     __cust_terlar_git_prompt
