@@ -6,6 +6,7 @@ zsh/local_env
 
 # Vim related directories to ignore
 vim/plugged
+vim/autoload/plug.vim.old
 
 # Ignore local fish config
 fish/local.fish
