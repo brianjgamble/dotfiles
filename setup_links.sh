@@ -13,4 +13,4 @@ ln -nfs ~/bin/dotfiles/misc/audio_links.m3u ~/audio_links.m3u
 
 mkdir -p ~/.config
 ln -nfs ~/bin/dotfiles/fish ~/.config/fish
-
+ln -nfs ~/bin/dotfiles/nvim ~/.config/nvim

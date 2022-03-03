@@ -65,6 +65,9 @@ set lazyredraw
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
+" disable cursor-styling
+set guicursor=
+
 colorscheme onedark
 set background=dark
 
