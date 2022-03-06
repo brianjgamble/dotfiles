@@ -11,3 +11,10 @@ source (brew --prefix asdf)/asdf.fish
 if test -e ~/.config/fish/local.fish
   source ~/.config/fish/local.fish
 end
+
+# Use Neovim as "preferred editor"
+set VISUAL nvim
+
+# Use Neovim instead of Vim or Vi
+alias vim=nvim
+alias vi=nvim
