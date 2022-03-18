@@ -75,12 +75,41 @@ set background=dark
 set listchars=trail:•
 highlight SpecialKey ctermfg=lightcyan
 
-" Configure CtrlP and use The Silver Searcher
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_use_caching = 0
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 
-" Load mappings
-source $HOME/.vim/mappings.vim
+  " bind K to grep word under cursor
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+  " Configure CtrlP and use The Silver Searcher
+  let g:ctrlp_map = '<leader>t'
+  let g:ctrlp_cmd = 'CtrlP'
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+" ===== Mappings =====
+" 
+" Map leader key to comma
+let mapleader = ","
+
+" Tab mappings.
+map <leader>tt :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmove
+
+" switch between files
+map ,, <C-^>
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
