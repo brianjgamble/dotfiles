@@ -1,3 +1,14 @@
+# Version control
 .git
 .hg
+
+# Vim files
 .*.swp
+
+# Sass
+.sass-cache
+*.css.map
+
+# JavaScript
+*.min.js
+*.js.map
