@@ -21,6 +21,8 @@ filetype plugin indent on         " Turn on file type detection.
 filetype on
 filetype indent on
 
+set shell=bash                    " Since I'm not using a bash shell
+
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
 
