@@ -1,12 +1,14 @@
 call plug#begin()
 
-Plug 'ctrlpvim/ctrlp.vim'            " Full path fuzzy finder
-Plug 'elixir-lang/vim-elixir'        " Elixir support
-Plug 'tpope/vim-rails'               " Plugin for Ruby on Rails
-Plug 'othree/html5.vim'              " HTML5 support
-Plug 'keith/rspec.vim'               " RSpec syntax highlighting
-Plug 'francoiscabrol/ranger.vim'     " Ranger.vim
-Plug 'rbgrouleff/bclose.vim'         " Needed to use ranger in neovim
+Plug 'ctrlpvim/ctrlp.vim'             " Full path fuzzy finder
+Plug 'elixir-lang/vim-elixir'         " Elixir support
+Plug 'tpope/vim-rails'                " Plugin for Ruby on Rails
+Plug 'othree/html5.vim'               " HTML5 support
+Plug 'keith/rspec.vim'                " RSpec syntax highlighting
+Plug 'francoiscabrol/ranger.vim'      " Ranger.vim
+Plug 'rbgrouleff/bclose.vim'          " Needed to use ranger in neovim
+Plug 'vim-airline/vim-airline'        " Status/tabline for vim
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -14,7 +16,7 @@ set nocompatible                  " Must come first because it changes other opt
 
 " syntax enable                     " Turn on syntax highlighting.
 if !exists("g:syntax_on")
-    syntax enable
+  syntax enable
 endif
 
 filetype plugin indent on         " Turn on file type detection.
@@ -22,6 +24,8 @@ filetype on
 filetype indent on
 
 set shell=bash                    " Since I'm not using a bash shell
+
+set encoding=utf-8
 
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
@@ -53,7 +57,7 @@ set noeb vb t_vb=                 " Disable beep and flash
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
 set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
-   
+
 set tabstop=2                     " Global tab width.
 set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
@@ -79,7 +83,7 @@ set background=dark
 set listchars=trail:•
 highlight SpecialKey ctermfg=lightcyan
 
-" The Silver Searcher
+" === The Silver Searcher
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -94,6 +98,25 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
   let g:ctrlp_use_caching = 0
 endif
+
+" === vim-airline
+
+" Display all buffers when only 1 tab is open
+let g:airline#extensions#tabline#enabled = 1
+
+" Straight tabs
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" Set how paths are displayed
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.colnr = ' C:'
+let g:airline_symbols.linenr = ' L:'
+let g:airline_symbols.maxlinenr = ''
 
 " ===== Mappings =====
 " 
