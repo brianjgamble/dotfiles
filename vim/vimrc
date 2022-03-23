@@ -121,7 +121,7 @@ let g:airline_symbols.maxlinenr = ''
 " Map leader key to comma
 let mapleader = ","
 
-" Tab mappings.
+" Tab mappings
 map <leader>tt :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
@@ -132,8 +132,12 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" switch between files
+" Switch between files
 map ,, <C-^>
+
+" Buffer mappings
+nnoremap <Leader>b :buffers<CR>:buffer<Space>
+nnoremap <Leader>n :bn<CR>
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
