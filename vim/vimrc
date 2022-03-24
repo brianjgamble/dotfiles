@@ -107,14 +107,18 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Set how paths are displayed
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#formatter = 'default'
 
+" Change some of the symbols
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.colnr = ' C:'
 let g:airline_symbols.linenr = ' L:'
 let g:airline_symbols.maxlinenr = ''
+
+" Set the theme
+let g:airline_theme='hybrid'
 
 " ===== Mappings =====
 " 
