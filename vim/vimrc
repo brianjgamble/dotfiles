@@ -81,6 +81,7 @@ set guicursor=
 
 colorscheme onedark
 set background=dark
+let g:onedark_termcolors=256
 
 " Highlight trailing whitespace
 set listchars=trail:•
@@ -120,7 +121,7 @@ endif
 let g:airline_symbols.colnr = ' C:'
 
 " Set the theme
-let g:airline_theme='hybrid'
+let g:airline_theme='onedark'
 
 " ===== Mappings =====
 " 
