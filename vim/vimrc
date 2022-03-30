@@ -12,6 +12,7 @@ Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 
 " Themes
 Plug 'joshdick/onedark.vim'
+Plug 'sainnhe/everforest'
 
 call plug#end()
 
