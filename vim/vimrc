@@ -10,6 +10,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'             " Vim plugin for Git
 Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 
+" Themes
+Plug 'joshdick/onedark.vim'
+
 call plug#end()
 
 set nocompatible                  " Must come first because it changes other options.
