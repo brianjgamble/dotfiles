@@ -22,6 +22,7 @@ alias tm="top -o vsize" # memory
 # git
 alias   g="git status"
 alias gpr="git pull --rebase"
+alias grs="git reset --soft HEAD~1"
 
 # homebrew
 alias bu="brew update; brew outdated | xargs brew install"
