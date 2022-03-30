@@ -8,6 +8,7 @@ Plug 'rbgrouleff/bclose.vim'          " Needed to use ranger in neovim
 Plug 'vim-airline/vim-airline'        " Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes' 
 Plug 'tpope/vim-fugitive'             " Vim plugin for Git
+Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 
 call plug#end()
 
@@ -69,6 +70,8 @@ set laststatus=2                  " Show the status line all the time
 set cursorline                    " Highlights current line
 
 set lazyredraw
+
+set updatetime=1000               " Set updatetime to 1 second
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
