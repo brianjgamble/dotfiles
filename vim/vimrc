@@ -79,9 +79,14 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLo
 " disable cursor-styling
 set guicursor=
 
-colorscheme onedark
+" Configure color scheme
+if has('termguicolors')
+  set termguicolors
+endif
+
 set background=dark
-let g:onedark_termcolors=256
+
+colorscheme onedark
 
 " Highlight trailing whitespace
 set listchars=trail:•
