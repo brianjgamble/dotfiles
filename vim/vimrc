@@ -13,6 +13,7 @@ Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 " Themes
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/everforest'
+Plug 'gentlelionstudios/gentledark.vim'
 
 call plug#end()
 
@@ -90,7 +91,7 @@ endif
 
 set background=dark
 
-colorscheme onedark
+colorscheme gentledark
 
 " Highlight trailing whitespace
 set listchars=trail:•
