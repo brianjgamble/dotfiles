@@ -131,7 +131,7 @@ endif
 let g:airline_symbols.colnr = ' C:'
 
 " Set the theme
-let g:airline_theme='onedark'
+let g:airline_theme='gentledark'
 
 " ===== Mappings =====
 " 
