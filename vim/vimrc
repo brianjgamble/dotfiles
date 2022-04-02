@@ -159,3 +159,5 @@ nnoremap <Leader>n :bn<CR>
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+" Temporary fix because of https://github.com/elixir-editors/vim-elixir/pull/560/files
+au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
