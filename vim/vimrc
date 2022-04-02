@@ -1,7 +1,7 @@
 call plug#begin()
 
 Plug 'ctrlpvim/ctrlp.vim'             " Full path fuzzy finder
-Plug 'elixir-lang/vim-elixir'         " Elixir support
+Plug 'elixir-editors/vim-elixir'      " Elixir support
 Plug 'othree/html5.vim'               " HTML5 support
 Plug 'francoiscabrol/ranger.vim'      " Ranger.vim
 Plug 'rbgrouleff/bclose.vim'          " Needed to use ranger in neovim
