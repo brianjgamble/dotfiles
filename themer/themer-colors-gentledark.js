@@ -10,7 +10,7 @@ module.exports.colors = {
     accent1: '#D49454',
     accent2: '#AC9F2A',
     accent3: '#4BA495',
-    accent4: '#80BECB',
+    accent4: '#468E9F',
     accent5: '#879499',
     accent6: '#B95AA0',
     accent7: '#6F8EB2',
