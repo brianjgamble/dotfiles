@@ -27,6 +27,10 @@ alias grs="git reset --soft HEAD~1"
 # homebrew
 alias bu="brew update; brew outdated | xargs brew install"
 
+# Use Neovim instead of Vim or Vi
+alias vim=nvim
+alias vi=nvim
+
 ## functions ##
 
 function take {
