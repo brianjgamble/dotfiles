@@ -14,6 +14,7 @@ Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/everforest'
 Plug 'gentlelionstudios/gentledark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
