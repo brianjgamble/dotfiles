@@ -3,10 +3,11 @@ call plug#begin()
 Plug 'ctrlpvim/ctrlp.vim'             " Full path fuzzy finder
 Plug 'elixir-editors/vim-elixir'      " Elixir support
 Plug 'othree/html5.vim'               " HTML5 support
+Plug 'ilyachur/cmake4vim'             " CMake integration to vim/neovim
 Plug 'francoiscabrol/ranger.vim'      " Ranger.vim
 Plug 'rbgrouleff/bclose.vim'          " Needed to use ranger in neovim
-Plug 'vim-airline/vim-airline'        " Status/tabline for vim
-Plug 'vim-airline/vim-airline-themes' 
+Plug 'vim-airline/vim-airline'        " Airline: Status/tabline for vim
+Plug 'vim-airline/vim-airline-themes' " Airline: themes
 Plug 'tpope/vim-fugitive'             " Vim plugin for Git
 Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
 
@@ -116,6 +117,10 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" === cmake4vim
+
+let g:cmake_build_type = 'Debug'
+
 " === vim-airline
 
 " Display all buffers when only 1 tab is open
@@ -164,3 +169,7 @@ nmap <leader>l :set list!<CR>
 
 " Temporary fix because of https://github.com/elixir-editors/vim-elixir/pull/560/files
 au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
+
+" Setup mapping and run formatting based on the file extension
+autocmd FileType cpp nnoremap <buffer> <leader>ff :%!clang-format<cr>
+autocmd FileType elixir nnoremap <buffer> <leader>ff :%!mix format<cr>:e!<cr>
