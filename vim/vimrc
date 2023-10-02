@@ -160,16 +160,9 @@ map <leader>tm :tabmove
 " Switch between files
 map ,, <C-^>
 
-" Buffer mappings
-nnoremap <Leader>b :buffers<CR>:buffer<Space>
-nnoremap <Leader>n :bn<CR>
-
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+" Shortcut to format the current buffer based on the filetype
+autocmd FileType cpp nnoremap <buffer> <leader>l :%! clang-format<cr>
+autocmd FileType elixir nnoremap <buffer> <leader>l :%! mix format -<cr>
 
 " Temporary fix because of https://github.com/elixir-editors/vim-elixir/pull/560/files
 au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
-
-" Shortcut to format the current buffer based on the filetype
-autocmd FileType cpp nnoremap <buffer> <leader>ff :%! clang-format<cr>
-autocmd FileType elixir nnoremap <buffer> <leader>ff :%! mix format -<cr>
