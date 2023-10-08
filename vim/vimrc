@@ -138,7 +138,8 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_symbols.colnr = ' C:'
+let g:airline_symbols.colnr = "\ue0a3:"
+let g:airline_symbols.branch = "\ue0c6"
 
 " Set the theme
 let g:airline_theme='everforest'
