@@ -120,7 +120,6 @@ if executable('ag')
 endif
 
 " === cmake4vim
-
 let g:cmake_build_type = 'Debug'
 
 " === vim-airline
@@ -163,9 +162,9 @@ map <leader>tm :tabmove
 " Switch between files
 map ,, <C-^>
 
-" Shortcut to format the current buffer based on the filetype
-autocmd FileType cpp nnoremap <buffer> <leader>l :%! clang-format<cr>
-autocmd FileType elixir nnoremap <buffer> <leader>l :%! mix format -<cr>
+" Setup code formatters
+autocmd FileType cpp setlocal formatprg=clang-format
+autocmd FileType elixir setlocal formatprg=mix\ format\ -
 
 " Temporary fix because of https://github.com/elixir-editors/vim-elixir/pull/560/files
 au BufRead,BufNewFile *.eex,*.heex,*.leex,*.sface,*.lexs set filetype=eelixir
