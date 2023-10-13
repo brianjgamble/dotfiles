@@ -12,12 +12,12 @@ Plug 'vim-airline/vim-airline'        " Airline: Status/tabline for vim
 Plug 'vim-airline/vim-airline-themes' " Airline: themes
 Plug 'tpope/vim-fugitive'             " Vim plugin for Git
 Plug 'airblade/vim-gitgutter'         " Shows git diff in the sign column
+Plug 'tomtom/tcomment_vim'            " comment code
 
 " Themes
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/everforest'
 Plug 'gentlelionstudios/gentledark.vim'
-Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
