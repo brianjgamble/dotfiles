@@ -18,3 +18,5 @@ set VISUAL nvim
 # Use Neovim instead of Vim or Vi
 alias vim=nvim
 alias vi=nvim
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /Users/bgamble/.ghcup/bin $PATH # ghcup-env
