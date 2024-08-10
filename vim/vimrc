@@ -72,7 +72,7 @@ set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
 set smartindent                   " Turn on smart indenting
 set autoindent                    " Turn on auto identing
-set textwidth=80
+set textwidth=102
 
 set laststatus=2                  " Show the status line all the time
 
