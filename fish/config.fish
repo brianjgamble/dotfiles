@@ -1,9 +1,14 @@
+set FLYCTL "/opt/homebrew/share/fish/vendor_completions.d/flyctl.fish"
+
 set PATH "/opt/homebrew/bin" $PATH
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 source /opt/homebrew/share/fish/vendor_completions.d/asdf.fish
 source /opt/homebrew/share/fish/vendor_completions.d/brew.fish
-source /opt/homebrew/share/fish/vendor_completions.d/flyctl.fish
+
+if test -e $FLYCTL
+  source $FLYCTL
+end
 
 if test -e ~/.config/fish/local.fish
   source ~/.config/fish/local.fish
