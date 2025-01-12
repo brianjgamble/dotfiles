@@ -11,3 +11,4 @@ ln -nfs ~/bin/dotfiles/gitignore ~/.gitignore
 mkdir -p ~/.config
 ln -nfs ~/bin/dotfiles/fish ~/.config/fish
 ln -nfs ~/bin/dotfiles/nvim ~/.config/nvim
+ln -nfs ~/bin/dotfiles/config/kitty ~/.config/kitty
