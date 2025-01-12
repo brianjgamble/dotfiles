@@ -10,3 +10,6 @@ vim/autoload/plug.vim.old
 
 # Ignore local fish config
 fish/local.fish
+
+# Ignore zed stuff
+config/zed/prompts/

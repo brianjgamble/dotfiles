@@ -12,3 +12,4 @@ mkdir -p ~/.config
 ln -nfs ~/bin/dotfiles/fish ~/.config/fish
 ln -nfs ~/bin/dotfiles/nvim ~/.config/nvim
 ln -nfs ~/bin/dotfiles/config/kitty ~/.config/kitty
+ln -nfs ~/bin/dotfiles/config/zed ~/.config/zed
