@@ -7,7 +7,6 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "base_keymap": "TextMate",
   "theme": "Gentle Dark",
   "vim_mode": true,
   "ui_font_size": 15,
