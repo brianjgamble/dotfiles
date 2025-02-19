@@ -1,5 +1,3 @@
-set FLYCTL "/opt/homebrew/share/fish/vendor_completions.d/flyctl.fish"
-
 # add homebrew to path
 set PATH "/opt/homebrew/bin" $PATH
 
@@ -14,10 +12,14 @@ set -gx --prepend PATH $_asdf_shims
 
 set --erase _asdf_shims
 
-source /opt/homebrew/share/fish/vendor_completions.d/asdf.fish
-source /opt/homebrew/share/fish/vendor_completions.d/brew.fish
+set BREW_PATH (brew --prefix)
 
+source $BREW_PATH/share/fish/vendor_completions.d/asdf.fish
+source $BREW_PATH/share/fish/vendor_completions.d/brew.fish
+
+set FLYCTL $BREW_PATH/share/fish/vendor_completions.d/flyctl.fish
 if test -e $FLYCTL
+  source $BREW_PATH/share/fish/vendor_completions.d/fly.fish
   source $FLYCTL
 end
 
