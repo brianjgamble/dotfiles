@@ -1,0 +1,25 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+      "ctrl-cmd-b": ["task::Spawn", { "task_name": "CMake: Build" }],
+      "ctrl-cmd-c": ["task::Spawn", { "task_name": "CMake: Configure" }],
+      "ctrl-alt-cmd-c": ["task::Spawn", { "task_name": "CMake: Clean" }],
+      "ctrl-cmd-r": ["task::Spawn", { "task_name": "CMake: Reload" }]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  }
+]

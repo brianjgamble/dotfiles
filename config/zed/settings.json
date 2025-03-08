@@ -16,6 +16,11 @@
   "terminal": {
     "font_size": 13
   },
+  // Settings related to the editor's tabs
+  "tabs": {
+    // Position of the close button on the editor tabs.
+    "close_position": "left"
+  },
   "languages": {
     "Elixir": {
       "language_servers": ["elixir-ls"],
@@ -34,6 +39,10 @@
         }
       },
       "language_servers": ["elixir-ls"]
+    },
+    "C++": {
+      "format_on_save": "on",
+      "tab_size": 2
     }
   }
 }
