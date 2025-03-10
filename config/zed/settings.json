@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "icon_theme": "Catppuccin Frappé",
   "theme": "Gentle Dark",
   "vim_mode": true,
   "ui_font_size": 15,
@@ -18,8 +19,8 @@
   },
   // Settings related to the editor's tabs
   "tabs": {
-    // Position of the close button on the editor tabs.
-    "close_position": "left"
+    "git_status": true,
+    "file_icons": true
   },
   "languages": {
     "Elixir": {
