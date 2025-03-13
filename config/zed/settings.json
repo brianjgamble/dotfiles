@@ -7,6 +7,9 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "git_panel": {
+    "dock": "right"
+  },
   "icon_theme": "Catppuccin Frappé",
   "theme": "Gentle Dark",
   "vim_mode": true,
@@ -25,21 +28,11 @@
   "languages": {
     "Elixir": {
       "language_servers": ["elixir-ls"],
-      "format_on_save": {
-        "external": {
-          "command": "mix",
-          "arguments": ["format", "--stdin-filename", "{buffer_path}", "-"]
-        }
-      }
+      "format_on_save": "on"
     },
     "HEEX": {
-      "format_on_save": {
-        "external": {
-          "command": "mix",
-          "arguments": ["format", "--stdin-filename", "{buffer_path}", "-"]
-        }
-      },
-      "language_servers": ["elixir-ls"]
+      "language_servers": ["elixir-ls"],
+      "format_on_save": "on"
     },
     "C++": {
       "format_on_save": "on",
