@@ -10,11 +10,6 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
-      "ctrl-cmd-c": ["task::Spawn", { "task_name": "CMake configure Debug" }],
-      "ctrl-alt-cmd-c": [
-        "task::Spawn",
-        { "task_name": "CMake configure Release" }
-      ],
       "ctrl-cmd-b": ["task::Spawn", { "task_name": "CMake build" }],
       "ctrl-alt-cmd-b": ["task::Spawn", { "task_name": "CMake clean build" }]
     }
@@ -23,6 +18,11 @@
     "context": "Editor",
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
+      "ctrl-cmd-c": ["task::Spawn", { "task_name": "CMake configure Debug" }],
+      "ctrl-alt-cmd-c": [
+        "task::Spawn",
+        { "task_name": "CMake configure Release" }
+      ]
     }
   }
 ]
