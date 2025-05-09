@@ -12,7 +12,7 @@
   },
   "icon_theme": "Catppuccin Frappé",
   "theme": "Gentle Dark",
-  "vim_mode": true,
+  "vim_mode": false,
   "ui_font_size": 15,
   "buffer_font_family": "Courier Prime Code",
   "buffer_font_size": 14,
