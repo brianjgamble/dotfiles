@@ -16,14 +16,18 @@
   "ui_font_size": 15,
   "buffer_font_family": "Courier Prime Code",
   "buffer_font_size": 14,
+  "file_finder": {
+    "modal_max_width": "medium"
+  },
   "tab_size": 2,
   "terminal": {
     "font_size": 13
   },
   // Settings related to the editor's tabs
   "tabs": {
+    "file_icons": true,
     "git_status": true,
-    "file_icons": true
+    "show_diagnostics": "errors"
   },
   "languages": {
     "Elixir": {
