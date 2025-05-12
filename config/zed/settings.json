@@ -37,6 +37,7 @@
   },
   "tab_size": 2,
   "tabs": {
+    "close_position": "left",
     "file_icons": true,
     "git_status": true,
     "show_diagnostics": "errors"
