@@ -40,6 +40,7 @@
     "close_position": "left",
     "file_icons": true,
     "git_status": true,
+    "show_close_button": "always",
     "show_diagnostics": "errors"
   },
   "telemetry": {
