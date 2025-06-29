@@ -33,3 +33,8 @@ set VISUAL nvim
 # Use Neovim instead of Vim or Vi
 alias vim=nvim
 alias vi=nvim
+
+# add haskell to path
+if test -e ~/.ghcup
+  set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /Users/briangamble/.ghcup/bin $PATH # ghcup-env
+end
