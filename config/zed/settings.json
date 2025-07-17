@@ -8,7 +8,7 @@
 // from the command palette or from `Zed` application menu.
 {
   "buffer_font_family": "Courier Prime Code",
-  "buffer_font_size": 14,
+  "buffer_font_size": 15,
   "git_panel": {
     "dock": "right"
   },
@@ -17,6 +17,10 @@
     "modal_max_width": "medium"
   },
   "languages": {
+    "C++": {
+      "format_on_save": "on",
+      "tab_size": 2
+    },
     "Elixir": {
       "language_servers": ["elixir-ls"],
       "format_on_save": "on"
@@ -25,15 +29,24 @@
       "language_servers": ["elixir-ls"],
       "format_on_save": "on"
     },
-    "C++": {
-      "format_on_save": "on",
-      "tab_size": 2
+    "Lua": {
+      "language_servers": ["pico8-ls"],
+      "format_on_save": "on"
     }
   },
   "lsp": {
     "clangd": {
-      "arguments": ["-background-index", "-compile-commands-dir=build"]
-    }
+      "binary": {
+        "arguments": ["-background-index", "-compile-commands-dir=build"]
+      }
+    },
+    "hls": {
+      "initialization_options": {
+        "haskell": {
+          "formattingProvider": "fourmolu"
+        }
+      }
+    },
   },
   "tab_size": 2,
   "tabs": {
@@ -48,9 +61,9 @@
     "metrics": false
   },
   "terminal": {
-    "font_size": 13
+    "font_size": 14
   },
   "theme": "Gentle Dark",
-  "ui_font_size": 15,
+  "ui_font_size": 16,
   "vim_mode": false
 }
