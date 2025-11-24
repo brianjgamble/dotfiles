@@ -7,9 +7,9 @@ end
 
 ### Update path
 
-# add haskell to path
+# add cabal/haskell to path
 if test -e ~/.ghcup
-  set -gx --prepend PATH "$HOME/.cabal/bin:$HOME/.ghcup/bin"
+  set -gx --prepend PATH "$HOME/.local/bin:$HOME/.ghcup/bin"
 end
 
 set -gx --prepend PATH "$HOME/bin:$_asdf_shims:/opt/homebrew/bin"
