@@ -47,6 +47,7 @@
     "hls": {
       "initialization_options": {
         "haskell": {
+          "cabalFormattingProvider": "cabal-gild",
           "formattingProvider": "fourmolu"
         }
       }
