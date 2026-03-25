@@ -29,7 +29,7 @@
       "language_servers": ["elixir-ls"],
       "format_on_save": "on"
     },
-    "HEEX": {
+    "HEEx": {
       "language_servers": ["elixir-ls"],
       "format_on_save": "on"
     },
