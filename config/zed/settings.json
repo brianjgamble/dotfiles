@@ -7,51 +7,52 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "base_keymap": "SublimeText",
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "format_on_save": "on",
   "buffer_font_family": "Courier Prime Code",
   "buffer_font_size": 15,
   "git_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "icon_theme": "Catppuccin Frappé",
   "file_finder": {
-    "modal_max_width": "medium"
+    "modal_max_width": "medium",
   },
   "languages": {
     "C++": {
       "format_on_save": "on",
-      "tab_size": 2
+      "tab_size": 2,
     },
     "Elixir": {
       "language_servers": ["elixir-ls"],
-      "format_on_save": "on"
+      "format_on_save": "on",
     },
     "HEEx": {
       "language_servers": ["elixir-ls"],
-      "format_on_save": "on"
+      "format_on_save": "on",
     },
     "Lua": {
       "language_servers": ["pico8-ls"],
-      "format_on_save": "on"
-    }
+      "format_on_save": "on",
+    },
   },
   "lsp": {
     "clangd": {
       "binary": {
-        "arguments": ["-background-index", "-compile-commands-dir=build"]
-      }
+        "arguments": ["-background-index", "-compile-commands-dir=build"],
+      },
     },
     "hls": {
       "initialization_options": {
         "haskell": {
           "cabalFormattingProvider": "cabal-gild",
-          "formattingProvider": "fourmolu"
-        }
-      }
-    }
+          "formattingProvider": "fourmolu",
+        },
+      },
+    },
   },
   "tab_size": 2,
   "tabs": {
@@ -59,16 +60,16 @@
     "file_icons": true,
     "git_status": true,
     "show_close_button": "always",
-    "show_diagnostics": "errors"
+    "show_diagnostics": "errors",
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "terminal": {
-    "font_size": 14
+    "font_size": 14,
   },
   "theme": "Gentle Dark",
   "ui_font_size": 16,
-  "vim_mode": false
+  "vim_mode": false,
 }
