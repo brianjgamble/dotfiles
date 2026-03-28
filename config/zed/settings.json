@@ -7,6 +7,17 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "agent": {
+    "message_editor_min_lines": 5,
+    "favorite_models": [],
+    "model_parameters": [],
+    "use_modifier_to_send": true,
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
   "base_keymap": "SublimeText",
   "edit_predictions": {
     "mode": "subtle",
