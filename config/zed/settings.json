@@ -7,16 +7,43 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "agent": {
-    "message_editor_min_lines": 5,
-    "favorite_models": [],
-    "model_parameters": [],
-    "use_modifier_to_send": true,
-  },
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
     },
+  },
+  "language_models": {
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "available_models": [
+        {
+          "name": "qwen3.5:9b",
+          "display_name": "Qwen 3.5 Coder 9B",
+          "max_tokens": 32768,
+          "supports_tools": true,
+        },
+        {
+          "name": "codellama:13b-instruct",
+          "display_name": "CodeLlama Fast",
+          "max_tokens": 3072,
+        },
+      ],
+    },
+  },
+  "agent": {
+    "message_editor_min_lines": 7,
+    "inline_assistant_model": {
+      "provider": "ollama",
+      "model": "codellama:13b-instruct",
+      "enable_thinking": false,
+    },
+    "use_modifier_to_send": true,
+    "default_model": {
+      "provider": "ollama",
+      "model": "qwen3.5:9b",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
   },
   "base_keymap": "SublimeText",
   "edit_predictions": {
