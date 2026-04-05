@@ -27,6 +27,10 @@ if test -e $FLYCTL
   source $FLYCTL
 end
 
+# Load AI functions
+source ~/.config/fish/ai.fish
+
+# Load local config
 if test -e ~/.config/fish/local.fish
   source ~/.config/fish/local.fish
 end

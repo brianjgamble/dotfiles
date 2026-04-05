@@ -9,6 +9,9 @@
 {
   "agent_servers": {
     "claude-acp": {
+      "default_config_options": {
+        "model": "default",
+      },
       "type": "registry",
     },
   },
@@ -18,23 +21,36 @@
       "available_models": [
         {
           "name": "qwen3.5:9b",
-          "display_name": "Qwen 3.5 Coder 9B",
+          "display_name": "Qwen 3.5 (Coding generalist/hybrid)",
           "max_tokens": 32768,
           "supports_tools": true,
         },
         {
-          "name": "codellama:13b-instruct",
-          "display_name": "CodeLlama Fast",
-          "max_tokens": 3072,
+          "name": "qwen2.5-coder:14b",
+          "display_name": "Qwen 2.5 (Heavy code analysis/refactoring)",
+          "max_tokens": 32768,
+          "supports_tools": true,
+        },
+        {
+          "name": "qwen2.5-coder:7b-instruct-q4_K_M",
+          "display_name": "Qwen 2.5 (Autocomplete)",
+          "max_tokens": 2048,
+        },
+        {
+          "name": "qwen2.5:14b-instruct",
+          "display_name": "Qwen 2.5 (Deep thinking/design/reasoning)",
+          "max_tokens": 32768,
+          "supports_tools": true,
         },
       ],
     },
   },
   "agent": {
+    "default_profile": "ask",
     "message_editor_min_lines": 7,
     "inline_assistant_model": {
       "provider": "ollama",
-      "model": "codellama:13b-instruct",
+      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
       "enable_thinking": false,
     },
     "use_modifier_to_send": true,
