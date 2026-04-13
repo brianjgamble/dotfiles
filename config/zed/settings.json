@@ -7,6 +7,79 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "language_models": {
+    "openai_compatible": {
+      "llama.cpp": {
+        "api_url": "http://localhost:8080/v1",
+        "available_models": [
+          {
+            "name": "ggml-org/gemma-4-E4B-it-GGUF:Q8",
+            "display_name": "gemma-4-E4B",
+            "max_tokens": 32768,
+            "max_output_tokens": 8192,
+            "max_completion_tokens": 8192,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+            },
+          },
+          {
+            "name": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF:Q5_K_M",
+            "display_name": "Qwen2.5-Coder-14B-Instruct",
+            "max_tokens": 32768,
+            "max_output_tokens": 8192,
+            "max_completion_tokens": 8192,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+            },
+          },
+        ],
+      },
+      "llama.cpp-autocomplete": {
+        "api_url": "http://localhost:8081/v1",
+        "available_models": [
+          {
+            "name": "ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF:Q8_0",
+            "display_name": "Qwen2.5-Coder-1.5B",
+            "max_tokens": 4096,
+            "max_output_tokens": 1024,
+            "max_completion_tokens": 1024,
+            "capabilities": {
+              "tools": false,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+            },
+          },
+        ],
+      },
+    },
+  },
+  "agent": {
+    "default_profile": "write",
+    "default_model": {
+      "provider": "llama.cpp",
+      "model": "ggml-org/gemma-4-E4B-it-GGUF:Q8",
+      "enable_thinking": false,
+    },
+    "message_editor_min_lines": 10,
+    "use_modifier_to_send": true,
+    "inline_assistant_model": {
+      "provider": "llama.cpp-autocomplete",
+      "model": "ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF:Q8_0",
+      "enable_thinking": false,
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
   "agent_servers": {
     "claude-acp": {
       "default_config_options": {
@@ -14,52 +87,6 @@
       },
       "type": "registry",
     },
-  },
-  "language_models": {
-    "ollama": {
-      "api_url": "http://localhost:11434",
-      "available_models": [
-        {
-          "name": "qwen3.5:9b",
-          "display_name": "Qwen 3.5 (Coding generalist/hybrid)",
-          "max_tokens": 32768,
-          "supports_tools": true,
-        },
-        {
-          "name": "qwen2.5-coder:14b",
-          "display_name": "Qwen 2.5 (Heavy code analysis/refactoring)",
-          "max_tokens": 32768,
-          "supports_tools": true,
-        },
-        {
-          "name": "qwen2.5-coder:7b-instruct-q4_K_M",
-          "display_name": "Qwen 2.5 (Autocomplete)",
-          "max_tokens": 2048,
-        },
-        {
-          "name": "qwen2.5:14b-instruct",
-          "display_name": "Qwen 2.5 (Deep thinking/design/reasoning)",
-          "max_tokens": 32768,
-          "supports_tools": true,
-        },
-      ],
-    },
-  },
-  "agent": {
-    "default_profile": "ask",
-    "message_editor_min_lines": 7,
-    "inline_assistant_model": {
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
-      "enable_thinking": false,
-    },
-    "use_modifier_to_send": true,
-    "default_model": {
-      "provider": "ollama",
-      "model": "qwen3.5:9b",
-    },
-    "favorite_models": [],
-    "model_parameters": [],
   },
   "base_keymap": "SublimeText",
   "edit_predictions": {
@@ -76,6 +103,12 @@
     "modal_max_width": "medium",
   },
   "languages": {
+    "Markdown": {
+      "indent_guides": {
+        "background_coloring": "indent_aware",
+        "coloring": "indent_aware",
+      },
+    },
     "C++": {
       "format_on_save": "on",
       "tab_size": 2,
