@@ -35,10 +35,16 @@ function ai_auto
   ./llama-server -hf ggml-org/Qwen2.5-Coder-1.5B-Q8_0-GGUF:Q8_0 --port 8081 -c 4096 --flash-attn on
 end
 
-# Gemma 4B
-function ai_gemma
+# Gemma 4B - creativity
+function ai_gemma_create
   cd sandbox/llm/llama.cpp/build/bin
-  ./llama-server -hf ggml-org/gemma-4-E4B-it-GGUF:Q8_0 --port 8080 -c 32768 --flash-attn on --no-mmap --jinja
+  ./llama-server -hf ggml-org/gemma-4-E4B-it-GGUF:BF16 --port 8080 --temp 1 -c 32768 --flash-attn on --no-mmap --jinja
+end
+
+# Gemma 4B - coding
+function ai_gemma_code
+  cd sandbox/llm/llama.cpp/build/bin
+  ./llama-server -hf ggml-org/gemma-4-E4B-it-GGUF:BF16 --port 8080 --temp 0.2 -c 32768 --flash-attn on --no-mmap --jinja
 end
 
 # Qwen 14B
