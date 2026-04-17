@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "ui_font_family": ".ZedSans",
   "language_models": {
     "openai_compatible": {
       "llama.cpp": {
@@ -94,11 +95,11 @@
   },
   "format_on_save": "on",
   "buffer_font_family": "Courier Prime Code",
-  "buffer_font_size": 15,
+  "buffer_font_size": 16.0,
   "git_panel": {
     "dock": "right",
   },
-  "icon_theme": "Catppuccin Frappé",
+  "icon_theme": "Catppuccin Mocha",
   "file_finder": {
     "modal_max_width": "medium",
   },
@@ -157,6 +158,6 @@
     "font_size": 14,
   },
   "theme": "Gentle Dark",
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "vim_mode": false,
 }
