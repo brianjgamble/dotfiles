@@ -71,3 +71,8 @@ set fish_pager_color_description B3A06D yellow
 set fish_pager_color_prefix white --bold --underline
 set fish_pager_color_progress brwhite --background=cyan
 set fish_pager_color_selected_background -r
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/briangamble/.lmstudio/bin
+# End of LM Studio CLI section
+
