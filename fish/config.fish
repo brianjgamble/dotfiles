@@ -27,8 +27,7 @@ if test -e $FLYCTL
   source $FLYCTL
 end
 
-# Load AI functions
-source ~/.config/fish/ai.fish
+fish_add_path /opt/homebrew/sbin
 
 # Load local config
 if test -e ~/.config/fish/local.fish
