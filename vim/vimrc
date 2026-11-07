@@ -95,9 +95,10 @@ endif
 
 set background=dark
 
-let g:everforest_background = 'hard'
-let g:everforest_better_performance = 1
-colorscheme everforest
+" let g:everforest_background = 'hard'
+" let g:everforest_better_performance = 1
+" colorscheme everforest
+colorscheme gentledark
 
 " Highlight trailing whitespace
 set listchars=trail:•
@@ -141,7 +142,7 @@ let g:airline_symbols.colnr = "\ue0a3:"
 let g:airline_symbols.branch = "\ue0c6"
 
 " Set the theme
-let g:airline_theme='everforest'
+let g:airline_theme='gentledark'
 
 " ===== Mappings =====
 " 
